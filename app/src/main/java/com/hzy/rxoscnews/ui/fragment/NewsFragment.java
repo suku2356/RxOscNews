@@ -13,8 +13,9 @@ import android.view.ViewGroup;
 import com.hzy.rxoscnews.R;
 import com.hzy.rxoscnews.adapter.NewsListAdapter;
 import com.hzy.rxoscnews.api.OscService;
-import com.hzy.rxoscnews.bean.NewsEntry;
+import com.hzy.rxoscnews.bean.ApiEntry;
 import com.hzy.rxoscnews.bean.NewsItem;
+import com.hzy.rxoscnews.bean.ResultNews;
 import com.hzy.rxoscnews.widget.LoadMoreRecyclerView;
 
 import java.util.List;
@@ -31,8 +32,7 @@ public class NewsFragment extends Fragment
         implements SwipeRefreshLayout.OnRefreshListener,
         LoadMoreRecyclerView.OnLoadMoreListener {
 
-    private static final int PAGE_SIZE = 20;
-    private int mCurPage = 0;
+    private String mNextPageToken = "";
 
     @Bind(R.id.id_swip_refresh)
     SwipeRefreshLayout mSwipRefresh;
@@ -72,6 +72,12 @@ public class NewsFragment extends Fragment
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @Override
     public void onRefresh() {
         getListData(true);
     }
@@ -83,18 +89,18 @@ public class NewsFragment extends Fragment
 
     private void getListData(boolean isRefresh) {
         if (isRefresh) {
-            mCurPage = 0;
+            mNextPageToken = "";
         }
-        OscService.create().getNews(0, mCurPage, PAGE_SIZE)
+        OscService.create().getNewsList(mNextPageToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(newsEntry -> onLoadSucceed(newsEntry, isRefresh),
                         error -> onLoadFail(error, isRefresh));
     }
 
-    private void onLoadSucceed(NewsEntry entry, boolean isRefresh) {
-        List<NewsItem> items = entry.getNewslist();
-        mCurPage++;
+    private void onLoadSucceed(ApiEntry<ResultNews> entry, boolean isRefresh) {
+        List<NewsItem> items = entry.getResult().getItems();
+        mNextPageToken = entry.getResult().getNextPageToken();
         if (isRefresh) {
             mSwipRefresh.setRefreshing(false);
             mMainAdapter.setItemList(items);

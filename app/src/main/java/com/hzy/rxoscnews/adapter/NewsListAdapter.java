@@ -1,14 +1,18 @@
 package com.hzy.rxoscnews.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hzy.rxoscnews.R;
 import com.hzy.rxoscnews.bean.NewsItem;
+import com.hzy.rxoscnews.ui.activity.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MainIt
 
     private final Context mContext;
     private List<NewsItem> mListItems;
+    private long mLastPosi = -1;
 
     public NewsListAdapter(Context context) {
         mContext = context;
@@ -56,9 +61,20 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MainIt
         holder.textTitle.setText(item.getTitle());
         holder.textContent.setText(item.getBody());
         holder.textTime.setText(item.getPubDate());
+        holder.viewFrame.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, DetailActivity.class);
+            intent.putExtra(DetailActivity.INTENT_EXTRA_NEWS_ID, item.getId());
+            mContext.startActivity(intent);
+        });
     }
 
     class MainItemHolder extends RecyclerView.ViewHolder {
+
+        @Bind(R.id.id_item_card)
+        CardView viewCard;
+
+        @Bind(R.id.id_item_frame)
+        LinearLayout viewFrame;
 
         @Bind(R.id.id_item_title)
         TextView textTitle;

@@ -1,19 +1,33 @@
 package com.hzy.rxoscnews.bean;
 
+import java.util.List;
+
 /**
  * Created by huzongrao on 16-9-2.
  */
-public class NewsItem {
+public class ResultDetail {
+    List<AboutItem> abouts;
     String author;
+    int authorId;
+    String authorPortrait;
+    int authorRelation;
     String body;
     int commentCount;
+    boolean favorite;
     String href;
     int id;
     String pubDate;
-    boolean recommend;
+    Software software;
     String title;
-    int type;
     int viewCount;
+
+    public List<AboutItem> getAbouts() {
+        return abouts;
+    }
+
+    public void setAbouts(List<AboutItem> abouts) {
+        this.abouts = abouts;
+    }
 
     public String getAuthor() {
         return author;
@@ -21,6 +35,30 @@ public class NewsItem {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getAuthorPortrait() {
+        return authorPortrait;
+    }
+
+    public void setAuthorPortrait(String authorPortrait) {
+        this.authorPortrait = authorPortrait;
+    }
+
+    public int getAuthorRelation() {
+        return authorRelation;
+    }
+
+    public void setAuthorRelation(int authorRelation) {
+        this.authorRelation = authorRelation;
     }
 
     public String getBody() {
@@ -37,6 +75,14 @@ public class NewsItem {
 
     public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 
     public String getHref() {
@@ -63,12 +109,12 @@ public class NewsItem {
         this.pubDate = pubDate;
     }
 
-    public boolean isRecommend() {
-        return recommend;
+    public Software getSoftware() {
+        return software;
     }
 
-    public void setRecommend(boolean recommend) {
-        this.recommend = recommend;
+    public void setSoftware(Software software) {
+        this.software = software;
     }
 
     public String getTitle() {
@@ -77,14 +123,6 @@ public class NewsItem {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public int getViewCount() {
