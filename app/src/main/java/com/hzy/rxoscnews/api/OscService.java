@@ -2,7 +2,7 @@ package com.hzy.rxoscnews.api;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 /**
  * Created by huzongrao on 16-9-1.
@@ -12,14 +12,14 @@ public class OscService {
 
     private static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_OSC_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(SimpleXmlConverterFactory.createNonStrict())
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build();
 
     private OscService() {
     }
 
-    public OscApi create() {
+    public static OscApi create() {
         return retrofit.create(OscApi.class);
     }
 }

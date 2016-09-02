@@ -75,6 +75,11 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:${retrofitLibVersion}"
     compile "com.squareup.retrofit2:converter-gson:${retrofitLibVersion}"
     compile "com.squareup.retrofit2:adapter-rxjava:${retrofitLibVersion}"
+    compile("com.squareup.retrofit2:converter-simplexml:${retrofitLibVersion}") {
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
 
     //ButterKnife DI
     compile 'com.jakewharton:butterknife:7.0.1'

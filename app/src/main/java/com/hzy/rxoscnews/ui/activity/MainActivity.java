@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hzy.rxoscnews.R;
-import com.hzy.rxoscnews.ui.fragment.MainFragment;
+import com.hzy.rxoscnews.ui.fragment.NewsFragment;
 import com.hzy.rxoscnews.ui.fragment.SettingsFragment;
 
 import butterknife.ButterKnife;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addFragments() {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.id_fragment_main, new MainFragment());
+        transaction.replace(R.id.id_fragment_main, new NewsFragment());
         transaction.replace(R.id.id_fragment_settings, new SettingsFragment());
         transaction.commit();
     }
