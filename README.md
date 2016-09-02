@@ -6,3 +6,5 @@ A simple demo to show how basic use for RxJava, Retrofit and RetroLambda in andr
 * RxJava: https://github.com/ReactiveX/RxJava
 * RxAndroid: https://github.com/ReactiveX/RxAndroid
 
+#### screenshot
+![screenshot](https://github.com/huzongyao/RxOscNews/blob/master/misc/screen.gif?raw=true)
